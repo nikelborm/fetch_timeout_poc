@@ -1,0 +1,24 @@
+{
+  "name": "poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikelborm/fetch_timeout_poc.git"
+  },
+  "keywords": [
+    "poc"
+  ],
+  "author": "nikelborm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikelborm/fetch_timeout_poc/issues"
+  },
+  "homepage": "https://github.com/nikelborm/fetch_timeout_poc#readme"
+}
