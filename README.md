@@ -113,4 +113,6 @@ timestamp when script actually finished:  1697853006236
 
 When `fetch` from `node-fetch` fails, it logs last few lines to console and script exits immediately. Difference between `timestamp when script should finish` and `timestamp when script actually finished` is 93 ms what also seems fine.
 
-The interesting thing is that `fetch` from `node-fetch` throws different error and returns control after 120 seconds. Original fetch returns control after 10 seconds and then hangs in the background 110 seconds. Looks very suspicious (120 == 110 + 10).
+The interesting thing is that `fetch` from `node-fetch` throws the same error as error thrown by original fetch when vpn disabled and notebook completely offline.
+
+`fetch` from `node-fetch` returns control after 120 seconds. Original fetch returns control after 10 seconds and then hangs in the background 110 seconds. Looks very suspicious (120 == 110 + 10).
