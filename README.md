@@ -85,3 +85,32 @@ timestamp when script actually finished:  1697849900162
 ```
 
 Difference between `timestamp when script should finish` and `timestamp when script actually finished` is 167 ms what also seems fine.
+
+### Running using node-fetch with described network configuration
+
+If we install `node-fetch` with `npm i node-fetch` and then import it in the beginning using `import fetch from 'node-fetch';` it will replace original fetch and will give us different behavior:
+
+```plaintext
+started fetch at:  2023-10-21T01:48:05.984Z
+FetchError: request to https://jsonplaceholder.typicode.com/todos/1 failed, reason: getaddrinfo EAI_AGAIN jsonplaceholder.typicode.com
+    at ClientRequest.<anonymous> (file:///home/nikel/projects/alarm/node_modules/node-fetch/src/index.js:108:11)
+    at ClientRequest.emit (node:events:517:28)
+    at TLSSocket.socketErrorListener (node:_http_client:501:9)
+    at TLSSocket.emit (node:events:517:28)
+    at emitErrorNT (node:internal/streams/destroy:151:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21) {
+  type: 'system',
+  errno: 'EAI_AGAIN',
+  code: 'EAI_AGAIN',
+  erroredSysCall: 'getaddrinfo'
+}
+finished fetch at:  2023-10-21T01:50:06.143Z
+fetch took 120159 ms
+timestamp when script should finish:  1697853006143
+timestamp when script actually finished:  1697853006236
+```
+
+When `fetch` from `node-fetch` fails, it logs last few lines to console and script exits immediately. Difference between `timestamp when script should finish` and `timestamp when script actually finished` is 93 ms what also seems fine.
+
+The interesting thing is that `fetch` from `node-fetch` throws different error and returns control after 120 seconds. Original fetch returns control after 10 seconds and then hangs in the background 110 seconds. Looks very suspicious (120 == 110 + 10).
