@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch index.js",
-    "start": "node index.js"
+    "start": "node index.js; node -e \"console.log('timestamp when script actually finished: ', Date.now())\""
   },
   "repository": {
     "type": "git",
