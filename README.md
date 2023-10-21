@@ -115,4 +115,4 @@ When `fetch` from `node-fetch` fails, it logs last few lines to console and scri
 
 The interesting thing is that `fetch` from `node-fetch` throws the same error as error thrown by original fetch when vpn disabled and notebook completely offline.
 
-`fetch` from `node-fetch` returns control after 120 seconds. Original fetch returns control after 10 seconds and then hangs in the background 110 seconds. Looks very suspicious (120 == 110 + 10).
+`fetch` from `node-fetch` returns control after 120 seconds. Original fetch returns control after 10 seconds and then hangs in the background 110 seconds. Looks very suspicious (`120 == 110 + 10`).
