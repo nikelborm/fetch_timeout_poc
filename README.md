@@ -2,7 +2,7 @@
 
 ## Steps to reproduce bug
 
-### QEMU VM approach
+### QEMU VM approach (preferred)
 
 1. download [compressed qemu vm disk image I've built after following steps from QEMU VM approach from scratch](https://mega.nz/file/rKBAyRIB#LOBRCBkbilBIiGbu_bkGFxERaK1hP-Wsch0f2SdSfiI)
 2. install `zstd` and `qemu`
@@ -40,7 +40,6 @@
    npm start
    ```
 
-
 To copy files between vm and host:
 1. on receiving side run `netcat -l -p 1234 > /destination.file`
 2. on sending side run `cat /source.file | netcat 192.168.___.___ 1234`
@@ -48,6 +47,13 @@ To copy files between vm and host:
 
 To fix internet (make internet work fine) in vm run `wg-quick down wg0`
 To break internet (return conditions where bug appears) in vm run `wg-quick up wg0`
+
+### Host approach
+
+1. enable wifi and connect to network with internet
+2. connect to wireguard vpn with sending all trafic through this vpn server
+3. disable wifi
+4. run `npm start`
 
 ## Current behavior
 
