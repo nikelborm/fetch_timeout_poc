@@ -2,6 +2,52 @@
 
 ## Steps to reproduce bug
 
+### QEMU VM approach
+
+1. download [compressed qemu vm disk image](https://mega.nz/file/rKBAyRIB#LOBRCBkbilBIiGbu_bkGFxERaK1hP-Wsch0f2SdSfiI)
+2. install `zstd` and `qemu`
+3. run `zstd -d archlinux.qcow2.zst` to decompress it
+4. create and run new QEMU vm in UEFI mode with mounted `archlinux.qcow2` disk
+5. login into newly installed arch with `root` user and `0000` password
+6. run `cd fetch_timeout_poc/; npm start`
+
+### QEMU VM approach from scratch
+
+1. install `qemu`
+2. [download latest arch iso](https://archlinux.org/download/)
+3. create and run new QEMU vm with mounted arch.iso in UEFI mode and set boot priority to booting from cd-rom first
+4. when will options to boot from installation media be presented, choose the first one
+5. run following commands one-by-one
+   ```bash
+   git clone https://github.com/nikelborm/fetch_timeout_poc.git;
+   archinstall --silent --config ./fetch_timeout_poc/vm.archinstall.user_configuration.json --creds ./fetch_timeout_poc/vm.archinstall.user_credentials.json;
+   reboot;
+   ```
+6. login into newly installed arch with `root` user and `0000` password
+7. run following commands one-by-one
+   ```bash
+   touch .bashrc;
+   echo '. .bashrc' > .profile;
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash;
+   git clone https://github.com/nikelborm/fetch_timeout_poc.git;
+   cp ./fetch_timeout_poc/vm.wg.conf /etc/wireguard/wg0.conf;
+   . .bashrc;
+   nvm list-remote;
+   nvm i 21;
+   systemctl enable wg-quick@wg0.service;
+   systemctl start wg-quick@wg0.service;
+   cd fetch_timeout_poc/;
+   npm start
+   ```
+
+
+To copy files between vm and host:
+1. on receiving side run `netcat -l -p 1234 > /destination.file`
+2. on sending side run `cat /source.file | netcat 192.168.___.___ 1234`
+3. on sending side press `Ctrl + C`
+
+### Host approach
+
 1. enable wifi and connect to network with internet
 2. connect to wireguard vpn with sending all trafic through this vpn server
 3. disable wifi
