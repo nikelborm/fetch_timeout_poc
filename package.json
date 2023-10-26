@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/nikelborm/fetch_timeout_poc/issues"
   },
-  "homepage": "https://github.com/nikelborm/fetch_timeout_poc#readme"
+  "homepage": "https://github.com/nikelborm/fetch_timeout_poc#readme",
+  "dependencies": {
+    "undici": "^5.26.5",
+    "why-is-node-running": "^2.2.2"
+  }
 }
