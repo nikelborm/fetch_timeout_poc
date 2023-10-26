@@ -1,5 +1,7 @@
 # fetch_timeout_poc
 
+Repo for issue [Leak and very long hanging when fetch throws `ConnectTimeoutError(UND_ERR_CONNECT_TIMEOUT)`](https://github.com/nodejs/undici/issues/2362)
+
 ## Steps to reproduce bug
 
 ### QEMU VM approach (preferred)
